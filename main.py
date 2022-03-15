@@ -33,6 +33,7 @@ if __name__ == '__main__':
 
 
     device = torch.device('cuda:{}'.format(args.gpus) if args.gpus != '-1' else 'cpu')
+    print('device name',device)
     model = Model(args).to(device)
 
     for name, value in model.named_parameters():

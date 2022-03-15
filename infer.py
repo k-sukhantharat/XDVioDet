@@ -9,6 +9,7 @@ import time
 
 
 if __name__ == '__main__':
+    print(np.__version__)
     args = option.parser.parse_args()
     device = torch.device("cuda")
 
@@ -18,7 +19,8 @@ if __name__ == '__main__':
     model = Model(args)
     model = model.to(device)
     model_dict = model.load_state_dict(
-        {k.replace('module.', ''): v for k, v in torch.load('ckpt/wsanodet_mix2.pkl').items()})
+        {k.replace('module.', ''): v for k, v in torch.load('ckpt/wsanodet48.pkl').items()})
+        # {k.replace('module.', ''): v for k, v in torch.load('ckpt/wsanodet_mix2.pkl').items()})
     gt = np.load(args.gt)
     st = time.time()
     pr_auc, pr_auc_online = test(test_loader, model, device, gt)
